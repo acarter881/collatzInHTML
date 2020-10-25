@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="author" content="Alex Carter">
+<title>Collatz conjecture</title>
+</head>
+<body>
+<h2 style="color:red">The Collatz conjecture</h2>
+
+<blockquote cite="https://www.quantamagazine.org/why-mathematicians-still-cant-solve-the-collatz-conjecture-20200922/">
+    <em>Despite recent progress on the notorious Collatz conjecture, we still don’t know whether a number can escape its infinite loop.</em>
+</blockquote>
+<div><strong>Patrick Honner</strong>, 2020 - <cite>The Simple Math Problem We Still Can’t Solve</cite></div>
+
+<h4>
+    The Collatz conjecture (a.k.a. the 3n + 1 problem) is, as of <time datetime="2020-10-24">Saturday, October 24<sup>th</sup>, 2020</time>, an unsolved math problem.
+</h4>
+<p>
+    The Collatz conjecture takes any positive integer <var>n</var> and does one of two actions to it:<br><br>
+    If <var>n</var> is even, divides <var>n</var> by 2.<br>
+    If <var>n</var> is odd, multiplies <var>n</var> by 3 and adds 1.<br><br>
+    Repeating this process for the return value of each previous iteration eventually results in a final output of 1.<br>
+    Laypeople may think that following the <abbr title="Keep It Simple Stupid">KISS</abbr> method would be enough to solve this math problem, but that is NOT the case.
+</p>
+<p>
+    For example, let's assume <var>n</var> is equal to 12:<br><br>
+    Since 12 is an even number, we'll divide <var>n</var> by 2, to get 6.<br>
+    Since 6 is also an even number, we'll divide 6 by 2, to get 3.<br>
+    Since 3 is an odd number, we'll multiply 3 times 3 and add 1, to get 10.<br>
+    Since 10 is an even number, we'll divide 10 by 2, to get 5.<br>
+    Since 5 is an odd number, we'll multiply 5 times 3 and add 1, to get 16.<br>
+    Since 16 is an even number, we'll divide 16 by 2, to get 8.<br>
+    Since 8 is an even number, we'll divide 8 by 2, to get 4.<br>
+    Since 4 is an even number, we'll divide 4 by 2, to get 2.<br>
+    Since 2 is an even number, we'll divide 2 by 2, to get 1.<br><br>
+    The Collatz conjecture takes 9 iterations to go from 12 to 1.
+</p>
+
+<h4>
+    Using Python to figure out the iterations it takes for a positive integer <var>n</var> to get to 1.
+</h4>
+
+<p>
+    The code at the bottom of the page starts off by defining a function called <var>collatz</var> which takes a single input (an integer <var>n</var>).<br>
+    When the program is run, the user is prompted to input a positive integer; this integer is stored in the <var>user_number</var> variable.<br>
+    After this, the program runs until the return value of <var>collatz(user_number)</var> is equal to 1, printing <var>n</var> and the return value for each iteration from <var>n</var> to 1, inclusive.<br>
+    The final output of the program is a line of text that tells you the number of iterations required to convert <var>n</var> to 1.
+</p>
+
+<div>If the user inputs <kbd>12</kbd> for the value of <var>n</var>, the program's output will be as follows:</div>
+
+<pre>
+    <samp>
+    Please input a positive integer: 
+    12
+    6
+    3
+    10
+    5
+    16
+    8
+    4
+    2
+    1
+    The number of iterations is: 9
+    </samp>
+</pre>
+
+<h4>The Python Code:</h4>
+
+<pre><code>def collatz(n):
+if n % 2 == 0:
+    return n // 2
+return 3 * n + 1
+
+while 1:
+    try:
+        user_number = int(input('Please input a positive integer: \n'))
+        if user_number < 1:
+            continue
+        break
+    except ValueError:
+        continue
+
+iter = 0
+
+while 1:
+    iter += 1
+    if collatz(user_number) == 1:
+        print(1)
+        break
+    print(collatz(user_number))
+    user_number = collatz(user_number)
+
+print('The number of iterations is: ' + str(iter))
+</code></pre>
+</body>
+</html>
